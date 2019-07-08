@@ -1,0 +1,70 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title {
+    @Model.TenKH    
+}
+
+<section class="hero-banner d-flex align-items-center">
+    <div class="container text-center">
+        <h2>@Model.TenKH</h2>
+        <nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+                @Model.Email
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="pricing_area area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-lg-3">
+                <div class="single-pricing">
+                    <div class="pricing-icon">
+                        <i class="ti-home"></i>
+                    </div>
+                    <div class="single-pricing-content">
+                        <h5>@Model.TenKH</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="single-pricing">
+                    <div class="pricing-icon">
+                        <i class="ti-home"></i>
+                    </div>
+                    <div class="single-pricing-content">
+                        <ul>
+                            <li>@Model.Email</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="single-pricing">
+                    <div class="pricing-icon">
+                        <i class="ti-home"></i>
+                    </div>
+                    <div class="single-pricing-content">
+                        <h5>@Model.DienThoaiKH</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="single-pricing">
+                    <div class="pricing-icon">
+                        <i class="ti-home"></i>
+                    </div>
+                    <div class="single-pricing-content">
+                        <ul>
+                            <li>@Model.DiaChi</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

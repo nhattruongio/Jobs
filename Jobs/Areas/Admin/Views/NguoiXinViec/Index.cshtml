@@ -1,0 +1,70 @@
+﻿
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+@section title {
+    Danh sách người xin việc
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách người xin việc</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <table class="table table-bordered dataTable" id="dataTable" width="100%" cellspacing="0" role="grid" aria-describedby="dataTable_info" style="width: 100%;">
+                            <thead>
+                                <tr role="row">
+                                    <th>Tên</th>
+                                    <th>Email</th>
+                                    <th>Tên đăng nhập</th>
+                                    <th>Điện thoại</th>
+                                    <th>Địa chỉ</th>
+                                    <th>Giới tính</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var x in Model)
+                                {
+                                    <tr role="row" class="odd">
+                                        <td>@x.TenKH</td>
+                                        <td>@x.Email</td>
+                                        <td>@x.TaiKhoanKH</td>
+                                        <td>@x.DienThoaiKH</td>
+                                        <td>@x.DiaChi</td>
+                                        <td>@x.GioiTinh</td>
+                                        <td><button onclick="deleteUser(@x.MaKH)" class="btn btn-danger btn-circle"><i class="fas fa-trash"></i></button></td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+@section scripts {
+    <script>
+        function deleteUser(id) {
+            $.ajax({
+                url: "@Url.Action("Delete", "NguoiXinViec", new { area = "Admin" })",
+                type: "POST",
+                dataType: "json",
+                data: { "id": id },
+                success: function (response) {
+                    alert(response.data)
+                    location.href = "@Url.Action("Index", "NguoiXinViec", new { area = "Admin" })"
+                },
+                error: function (xhr, status, error) {
+                    console.log(xhr.responseText)
+                }
+            })
+        }
+    </script>
+}

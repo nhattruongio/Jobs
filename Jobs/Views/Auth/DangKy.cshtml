@@ -1,0 +1,86 @@
+﻿@model Jobs.Models.KHACHHANG
+
+@{
+    Layout = "~/Views/Shared/_LayoutAuth.cshtml";
+}
+
+@section title {
+    Đăng ký
+}
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-t-50 p-b-90">
+            @using (Html.BeginForm("DangKy", "Auth", FormMethod.Post, new { @class = "login100-form validate-form flex-sb flex-w" }))
+            {
+                <span class="login100-form-title p-b-51">
+                    Đăng ký
+                </span>
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Tên đăng nhập không được để trống">
+                    @Html.TextBoxFor(Model => Model.TaiKhoanKH, new { @class = "input100", @placeholder = "Tên đăng nhập" })
+                    @Html.Raw(ViewBag.username)
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Mật khẩu không được để trống">
+                    @Html.TextBoxFor(Model => Model.MatKhauKH, new { @class = "input100", @placeholder = "Mật khẩu", type = "password" })
+                    @Html.Raw(ViewBag.password)
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Mật khẩu không được để trống">
+                    <input type="password" name="re_password" id="re_password" placeholder="Nhập lại mật khẩu" class="input100" />
+                    @Html.Raw(ViewBag.confirmPassword)
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Email không được để trống">
+                    @Html.TextBoxFor(Model => Model.Email, new { @class = "input100", @placeholder = "Email", type = "email" })
+                    @Html.Raw(ViewBag.email)
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Giới tính không được để trống">
+                    <select name="sex" class="input100">
+                        <option value="Nam" selected>Nam</option>
+                        <option value="Nữ">Nữ</option>
+                    </select>
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Giới tính không được để trống">
+                    @Html.TextBoxFor(Model => Model.TenKH, new { @class = "input100", @placeholder = "Tên đầy đủ" })
+                    @Html.Raw(ViewBag.fullname)
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Giới tính không được để trống">
+                    @Html.TextBoxFor(Model => Model.DiaChi, new { @class = "input100", @placeholder = "Địa chỉ" })
+                    @Html.Raw(ViewBag.address)
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Số điện thoại không được để trống">
+                    @Html.TextBoxFor(Model => Model.DienThoaiKH, new { type = "number", @class = "input100", @placeholder = "Số điện thoại" })
+                    @Html.Raw(ViewBag.tel)
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Loại tài khoản không được để trống">
+                    <select name="role" class="input100">
+                        <option value="1" selected>Người xin việc</option>
+                        <option value="2">Nhà tuyển dụng</option>
+                    </select>
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="flex-sb-m w-full p-t-3 p-b-24">
+                    <div class="contact100-form-checkbox">
+                    </div>
+                    <div>
+                        <a href="@Url.Action("DangNhap", "Auth", new { area = "" })" class="txt1">
+                            Đăng nhập
+                        </a>
+                    </div>
+                </div>
+                @Html.Raw(ViewBag.errorsignup1)
+                <div class="container-login100-form-btn m-t-17">
+                    <button class="login100-form-btn">
+                        Đăng ký
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

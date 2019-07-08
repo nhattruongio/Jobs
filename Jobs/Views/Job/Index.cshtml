@@ -1,0 +1,124 @@
+﻿@model Jobs.Models.CONGVIEC
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title {
+    Đăng tin tuyển dụng
+}
+<section class="hero-banner d-flex align-items-center">
+    <div class="container text-center">
+        <h2>Đăng tin tuyển dụng</h2>
+        <nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Dành cho người dùng</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+<div class="whole-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                @using (Html.BeginForm("Index", "Job", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <div class="mt-10">
+                        <label>Số lượng</label>
+                        @Html.TextBoxFor(Model => Model.SoLuong, new { type = "text", @class = "single-input", @placeholder = "Nhập số lượng" })
+                        @Html.Raw(ViewBag.soluong)
+                    </div>
+                    <div class="mt-10">
+                        <label>Yêu cầu</label>
+                        @Html.TextBoxFor(Model => Model.YeuCau, new { type = "text", @class = "single-input", @placeholder = "Nhập yêu cầu" })
+                        @Html.Raw(ViewBag.request)
+                    </div>
+                    <div class="mt-10">
+                        <label>Địa chị</label>
+                        @Html.TextBoxFor(Model => Model.DiaChi, new { type = "text", @class = "single-input", @placeholder = "Nhập địa chỉ" })
+                        @Html.Raw(ViewBag.address)
+                    </div>
+                    <div class="mt-10">
+                        <label>Lương</label>
+                        @Html.TextBoxFor(Model => Model.Luong, new { type = "number", @class = "single-input", @placeholder = "Nhập lương" })
+                        @Html.Raw(ViewBag.saraly)
+                    </div>
+                    <div class="mt-10">
+                        <label>Mô tả</label>
+                        @Html.TextBoxFor(Model => Model.MoTa, new { type = "text", @class = "single-input", @placeholder = "Nhập mô tả" })
+                        @Html.Raw(ViewBag.description)
+                    </div>
+                    <div class="mt-10">
+                        <label>Chức vụ</label>
+                        @Html.TextBoxFor(Model => Model.ChucVu, new { type = "text", @class = "single-input", @placeholder = "Nhập chức vụ" })
+                        @Html.Raw(ViewBag.position)
+                    </div>
+                    <div class="mt-10">
+                        <label>Tình trạng</label>
+                        <select name="tinhtrang" class="single-input">
+                            <option value="Đang tuyển">Đang tuyển</option>
+                            <option value="Hết tuyển">Hết tuyển</option>
+                        </select>
+                    </div>
+                    <div class="mt-10">
+                        <label>Ảnh đại diện</label>
+                        <div class="image-upload-wrap">
+                            <input class="file-upload-input" type="file" id="Anh"
+                                   name="Anh"
+                                   onchange="readURL(this);" accept="image/*" />
+                            <div class="drag-text">
+                                <h3>Kéo hình ảnh vào đây</h3>
+                            </div>
+                        </div>
+                        <div class="file-upload-content">
+                            <img class="file-upload-image" src="#" alt="your image" />
+                            <div class="image-title-wrap">
+                                <button type="button" onclick="removeUpload()" class="remove-image">
+                                    Xoá
+                                    <span class="image-title"></span>
+                                </button>
+                            </div>
+                        </div>
+                        @Html.Raw(ViewBag.image)
+                    </div>
+                    @Html.Raw(ViewBag.incorrect)
+                    <div class="mt-10">
+                        <button class="genric-btn success-border radius">Đăng tin tuyển dụng</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script>
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader()
+                reader.onload = function (e) {
+                    $('.image-upload-wrap').hide()
+                    $('.file-upload-image').attr('src', e.target.result)
+                    $('.file-upload-content').show()
+                    $('.image-title').html(input.files[0].name)
+                }
+                reader.readAsDataURL(input.files[0])
+            } else {
+                removeUpload()
+            }
+        }
+
+        function removeUpload() {
+            $('.file-upload-input').replaceWith($('.file-upload-input').clone())
+            $('.file-upload-content').hide()
+            $('.image-upload-wrap').show()
+        }
+
+        $('.image-upload-wrap').bind('dragover', function () {
+            $('.image-upload-wrap').addClass('image-dropping')
+        })
+        $('.image-upload-wrap').bind('dragleave', function () {
+            $('.image-upload-wrap').removeClass('image-dropping')
+        })
+    </script>
+}

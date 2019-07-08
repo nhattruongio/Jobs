@@ -1,0 +1,52 @@
+﻿@model Jobs.Models.KHACHHANG
+
+@{
+    Layout = "~/Views/Shared/_LayoutAuth.cshtml";
+}
+
+@section title {
+    Đăng nhập
+}
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-t-50 p-b-90">
+            @using (Html.BeginForm("DangNhap", "Auth", FormMethod.Post, new { @class = "login100-form validate-form flex-sb flex-w" }))
+            {
+                <span class="login100-form-title p-b-51">
+                    Đăng nhập
+                </span>
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Username is required">
+                    @Html.TextBoxFor(Model => Model.TaiKhoanKH, new { @class = "input100", @placeholder = "Tên đăng nhập" })
+                    @Html.Raw(ViewBag.username)
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
+                    @Html.TextBoxFor(Model => Model.MatKhauKH, new { @class = "input100", @placeholder = "Mật khẩu", type = "password" })
+                    @Html.Raw(ViewBag.password)
+                    @Html.Raw(ViewBag.confirmPassword)
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="flex-sb-m w-full p-t-3 p-b-24">
+                    <div class="contact100-form-checkbox">
+                        <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                        <label class="label-checkbox100" for="ckb1">
+                            Nhớ tôi
+                        </label>
+                    </div>
+                    <div>
+                        <a href="@Url.Action("DangKy", "Auth", new { area = "" })" class="txt1">
+                            Đăng ký
+                        </a>
+                    </div>
+                </div>
+                @Html.Raw(ViewBag.errorLogin1)
+                <div class="container-login100-form-btn m-t-17">
+                    <button class="login100-form-btn">
+                        Đăng nhập
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

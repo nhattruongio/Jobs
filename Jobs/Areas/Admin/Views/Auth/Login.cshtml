@@ -1,0 +1,39 @@
+﻿@model Jobs.Models.ADMIN
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutAuth.cshtml";
+}
+
+@section title {
+    Đăng nhập vào bảng quản trị
+}
+
+<div class="limiter">
+    <div class="container-login100">
+        <div class="wrap-login100 p-t-50 p-b-90">
+            @using (Html.BeginForm("Login", "Auth", FormMethod.Post, new { @class = "login100-form validate-form flex-sb flex-w", area = "Admin" }))
+            {
+                <span class="login100-form-title p-b-51">
+                    Đăng nhập vào bảng quản trị
+                </span>
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Username is required">
+                    @Html.TextBoxFor(Model => Model.TaiKhoan, new { @class = "input100", @placeholder = "Tên đăng nhập" })
+                    @Html.Raw(ViewBag.username)
+                    <span class="focus-input100"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
+                    @Html.TextBoxFor(Model => Model.Matkhau, new { @class = "input100", @placeholder = "Mật khẩu", type = "password" })
+                    @Html.Raw(ViewBag.password)
+                    @Html.Raw(ViewBag.confirmPassword)
+                    <span class="focus-input100"></span>
+                </div>
+                @Html.Raw(ViewBag.errorLogin1)
+                <div class="container-login100-form-btn m-t-17">
+                    <button class="login100-form-btn">
+                        Đăng nhập
+                    </button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

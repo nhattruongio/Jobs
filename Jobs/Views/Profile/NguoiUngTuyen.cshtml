@@ -1,0 +1,48 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title {
+    Danh sách công việc
+}
+
+<section class="hero-banner d-flex align-items-center">
+    <div class="container text-center">
+        <h2>Danh sách công việc</h2>
+        <nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb"></ol>
+        </nav>
+    </div>
+</section>
+
+<section class="blog_area area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mb-5 mb-lg-0">
+                <div class="blog_left_sidebar">
+                    @foreach (var x in Model)
+                    {
+                        <article class="blog_item">
+                            <div class="blog_item_img">
+                                <img class="card-img rounded-0" src="~/@x.Anh" alt="">
+                                <a href="#" class="blog_item_date">@x.NgayCapNhat</a>
+                            </div>
+                            <div class="blog_details">
+                                <a class="d-inline-block" href="@Url.Action("XemNguoiUngTuyen", "Job", new { area = "", id = x.MaCV })">
+                                    <h2>@x.MoTa</h2>
+                                </a>
+                                <p>@x.TinhTrang</p>
+                                <ul class="blog-info-link">
+                                    <li>Số lượng tuyển: @x.SoLuong</li>
+                                    <li>Lương: @x.Luong người</li>
+                                    <li>Địa chỉ: @x.DiaChi</li>
+                                    <li>Yêu cầu: @x.YeuCau</li>
+                                </ul>
+                            </div>
+                        </article>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,70 @@
+﻿@model Jobs.Models.KHACHHANG
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title {
+    @Session["NguoiDung"]
+}
+
+<section class="hero-banner d-flex align-items-center">
+    <div class="container text-center">
+        <h2>@Session["NguoiDung"]</h2>
+        <nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">Thông tin cá nhân</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<div class="whole-wrap">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                @using (Html.BeginForm("Index", "Auth", FormMethod.Post))
+                {
+                    <div class="mt-10">
+                        <label>Tên đầy đủ</label>
+                        @Html.TextBoxFor(Model => Model.TenKH, new { type = "text", @class = "single-input", @placeholder = "Nhập tên đầy đủ" })
+                        @Html.Raw(ViewBag.fullname)
+                    </div>
+                    <div class="mt-10">
+                        <label>Tên đăng nhập</label>
+                        @Html.TextBoxFor(Model => Model.TaiKhoanKH, new { type = "text", @class = "single-input", @readonly = "readonly" })
+                    </div>
+                    <div class="mt-10">
+                        <label>Email</label>
+                        @Html.TextBoxFor(Model => Model.Email, new { type = "text", @class = "single-input", @readonly = "readonly" })
+                    </div>
+                    <div class="mt-10">
+                        <label>Số điện thoại</label>
+                        @Html.TextBoxFor(Model => Model.DienThoaiKH, new { type = "text", @class = "single-input" })
+                        @Html.Raw(ViewBag.tel)
+                    </div>
+                    <div class="mt-10">
+                        <label>Địa chỉ</label>
+                        @Html.TextBoxFor(Model => Model.DiaChi, new { type = "text", @class = "single-input" })
+                        @Html.Raw(ViewBag.address)
+                    </div>
+                    <div class="mt-10">
+                        <label>Giới tính</label>
+                        <select name="sex" class="single-input">
+                            <option value="Nam">Name</option>
+                            <option value="Nữ">Nữ</option>
+                        </select>
+                    </div>
+                    <div class="mt-10">
+                        <label>Loại tài khoản</label>
+                        <input class="single-input" type="text" value="@ViewBag.LoaiTK" readonly />
+                    </div>
+                    @Html.Raw(ViewBag.incorrect)
+                    <div class="mt-10">
+                        <button class="genric-btn success-border radius">Cập nhật thông tin</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,165 @@
+﻿<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="icon" href="~/Content/job/img/favicon.png" type="image/png">
+    <title>@RenderSection("title", required: false) | Tìm kiếm việc làm nhanh chóng |</title>
+
+    <link rel="stylesheet" href="~/Content/job/css/bootstrap.css">
+    <link rel="stylesheet" href="~/Content/job/css/themify-icons.css">
+    <link rel="stylesheet" href="~/Content/job/vendors/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="~/Content/job/vendors/owl-carousel/owl.carousel.min.css">
+    <link rel="stylesheet" href="~/Content/job/vendors/animate-css/animate.css">
+    <link rel="stylesheet" href="~/Content/job/css/style.css">
+    <link rel="stylesheet" href="~/Content/job/css/responsive.css">
+
+    <link rel="stylesheet" href="~/Content/Site.css" />
+    @RenderSection("stylesheets", required: false)
+</head>
+<body>
+    <header class="header_area navbar_fixed">
+        <div class="main_menu">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <div class="container">
+
+                    <a class="navbar-brand logo_h" href="@Url.Action("Index", "Home", new { area = "" })"><img src="~/Content/job/img/logo.png" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+                        <ul class="nav navbar-nav menu_nav ml-auto">
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Home", new { area = "" })">Trang Chủ</a></li>
+                            @*<li class="nav-item"><a class="nav-link" href="@Url.Action("About", "Home", new { area = "" })">Giới Thiệu</a></li>*@
+                            <li class="nav-item submenu dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Thư Viện</a>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("ListJob", "Job", new { area = "" })">Tìm Việc</a></li>
+                                    <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Job", new { area = "" })">Đăng Tin</a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="@Url.Action("Contact", "Home", new { area = "" })">Liên Hệ</a></li>
+
+                            @if (Session["NguoiDung"] == null)
+                            {
+                                <li class="nav-item submenu dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Tài khoản</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("DangKy", "Auth", new { area = "" })">Đăng ký</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("DangNhap", "Auth", new { area = "" })">Đăng nhập</a></li>
+                                    </ul>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item submenu dropdown">
+                                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@Session["NguoiDung"]</a>
+                                    <ul class="dropdown-menu">
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("Index", "Profile", new { area = "" })">Trang cá nhân</a></li>
+                                        @if (int.Parse(Session["LoaiTK"].ToString()) == 1)
+                                        {
+                                            <li class="nav-item"><a class="nav-link" href="@Url.Action("ListJob", "Profile", new { area = "" })">DS công việc</a></li>
+                                        }
+                                        else
+                                        {
+                                            <li class="nav-item"><a class="nav-link" href="@Url.Action("NguoiUngTuyen", "Profile", new { area = "" })">Người ứng tuyển</a></li>
+                                        }
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("ChangePassword", "Auth", new { area = "" })">Đổi mật khẩu</a></li>
+                                        <li class="nav-item"><a class="nav-link" href="@Url.Action("DangXuat", "Auth", new { area = "" })">Đăng xuất</a></li>
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                    <div class="right-button">
+                        <ul>
+                            <li class="shop-icon"><a href="#"><i class="ti-shopping-cart-full"></i><span>0</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </header>
+    @RenderBody()
+    <footer class="footer-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-sm-6 mb-4 mb-xl-0 single-footer-widget">
+                    <h4>About Us</h4>
+                    <p>Heaven fruitful doesn't over lesser days appear creeping seasons so behold bearing days open</p>
+                    <div class="footer-logo">
+                        <img src="~/Content/job/img/logo.png" alt="">
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mb-4 mb-xl-0 single-footer-widget">
+                    <h4>Liên Hệ</h4>
+                    <div class="footer-address">
+                        <p>
+                            Address :69 Điện Biên Phủ, Thủ Đức
+                            Thành phố Hồ Chí Minh.
+                        </p>
+                        <span>Phone : +8880 44338899</span>
+                        <span>Email : YoWassup@gmail.com</span>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 mb-4 mb-xl-0 single-footer-widget">
+                    <h4>Liên Kết</h4>
+                    <ul>
+                        <li><a href="#">WHMCS-bridge</a></li>
+                        <li><a href="#">Search Domain</a></li>
+                        <li><a href="#">My Account</a></li>
+                        <li><a href="#">Shopping Cart</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-8 mb-4 mb-xl-0 single-footer-widget">
+                    <h4>Phản Hồi</h4>
+                    <p>Đóng góp ý kiến nội dung</p>
+                    <div class="form-wrap" id="mc_embed_signup">
+                        <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01"
+                              method="get">
+                            <div class="input-group">
+                                <input type="email" class="form-control" name="EMAIL" placeholder="Your Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Địa Chỉ Email '">
+                                <div class="input-group-append">
+                                    <button class="btn click-btn" type="submit">
+                                        <i class="fab fa-telegram-plane"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div style="position: absolute; left: -5000px;">
+                                <input name="b_36c4fd991d266f23781ded980_aefe40901a" tabindex="-1" value="" type="text">
+                            </div>
+                            <div class="info"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom row align-items-center text-center text-lg-left no-gutters">
+                <p class="footer-text m-0 col-lg-8 col-md-12">
+                    Copyright &copy; Trọng Tín
+                </p>
+                <div class="col-lg-4 col-md-12 text-center text-lg-right footer-social">
+                    <a href="#"><i class="ti-facebook"></i></a>
+                    <a href="#"><i class="ti-twitter-alt"></i></a>
+                    <a href="#"><i class="ti-dribbble"></i></a>
+                    <a href="#"><i class="ti-linkedin"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/Content/job/js/jquery-2.2.4.min.js"></script>
+    <script src="~/Content/job/js/popper.js"></script>
+    <script src="~/Content/job/js/bootstrap.min.js"></script>
+    <script src="~/Content/job/vendors/owl-carousel/owl.carousel.min.js"></script>
+    <script src="~/Content/job/js/jquery.ajaxchimp.min.js"></script>
+    <script src="~/Content/job/js/waypoints.min.js"></script>
+    <script src="~/Content/job/js/mail-script.js"></script>
+    <script src="~/Content/job/js/contact.js"></script>
+    <script src="~/Content/job/js/jquery.form.js"></script>
+    <script src="~/Content/job/js/jquery.validate.min.js"></script>
+    <script src="~/Content/job/js/mail-script.js"></script>
+    <script src="~/Content/job/js/theme.js"></script>
+    @RenderSection("scripts", required: false)
+</body>
+</html>

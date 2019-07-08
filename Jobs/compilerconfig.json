@@ -1,0 +1,14 @@
+﻿[
+  {
+    "outputFile": "Content/job/scss/_header.css",
+    "inputFile": "Content/job/scss/_header.scss"
+  },
+  {
+    "outputFile": "Content/job/scss/style.css",
+    "inputFile": "Content/job/scss/style.scss"
+  },
+  {
+    "outputFile": "Content/job/scss/_about.css",
+    "inputFile": "Content/job/scss/_about.scss"
+  }
+]

@@ -1,0 +1,112 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title {
+    Danh sách công việc
+}
+
+<section class="hero-banner d-flex align-items-center">
+    <div class="container text-center">
+        <h2>Danh sách công việc</h2>
+        <nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item active" aria-current="page">Dành cho người xin việc</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<section class="blog_area area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mb-5 mb-lg-0">
+                <div class="blog_left_sidebar">
+                    @foreach (var x in Model)
+                    {
+                        <article class="blog_item">
+                            <div class="blog_item_img">
+                                <img class="card-img rounded-0" src="~/@x.Anh" alt="">
+                                <div class="blog_item_date">@x.NgayCapNhat</div>
+                            </div>
+                            <div class="blog_details">
+                                <a class="d-inline-block" href="@Url.Action("View", "Job", new { area = "", id = x.MaCV })">
+                                    <h2>@x.MoTa</h2>
+                                </a>
+                                <p>@x.TinhTrang</p>
+                                <ul class="blog-info-link">
+                                    <li>Số lượng tuyển: @x.SoLuong</li>
+                                    <li>Lương: @x.Luong người</li>
+                                    <li>Địa chỉ: @x.DiaChi</li>
+                                    <li>Yêu cầu: @x.YeuCau</li>
+                                </ul>
+                            </div>
+                        </article>
+                    }
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="blog_right_sidebar">
+                    <aside class="single_sidebar_widget search_widget">
+                        <div class="form-group">
+                            <div class="input-group mb-3">
+                                <input type="text" name="key" id="key" class="form-control" placeholder="Nhập từ khoá">
+                                <div class="input-group-append">
+                                    <button class="btn" type="button"><i class="ti-search"></i></button>
+                                </div>
+                            </div>
+                            <div class="kq">
+                            </div>
+                        </div>
+                        <button id="submit_search" class="button rounded-0 primary-bg text-white w-100" type="submit">Tìm kiếm</button>
+                    </aside>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script>
+        $(document).ready(function () {
+            $("#key").on("keyup change", function (e) {
+                e.preventDefault()
+                let inputKey = $('input[id="key"]').val()
+                if (inputKey.length == false) {
+                    $(".kq").text("")
+                    return false
+                }
+                else {
+                    $.ajax({
+                        type: "POST",
+                        dataType: "json",
+                        data: { "key": inputKey },
+                        url: "@Url.Action("Index", "Search", new { area = "" })",
+                        success: function (response) {
+                            if (response.status == true) {
+                                let data = "<ul class=\"list-kq\">"
+                                $.each(response.data, function (item) {
+                                    var url = '@Url.Action("View", "Job", new { area = "", id = "_id_" })'.replace('_id_', response.data[item].MaCV);
+                                    data += "<li>"
+                                    data += "<a href=\"" + url + "\">"
+                                    data += response.data[item].MoTa
+                                    data += "</a></li>"
+                                })
+                                data += "</ul>"
+
+                                $(".kq").append(data)
+                            }
+                            else {
+                                $(".kq").text("")
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(xhr.responseText)
+                        }
+                    })
+                }
+            })
+        })
+    </script>
+}

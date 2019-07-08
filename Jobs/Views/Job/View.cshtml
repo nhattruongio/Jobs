@@ -1,0 +1,72 @@
+﻿
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section title {
+    Xem chi tiết công việc
+}
+
+<section class="hero-banner d-flex align-items-center">
+    <div class="container text-center">
+        <h2>Chi tiết công việc</h2>
+        <nav aria-label="breadcrumb" class="banner-breadcrumb">
+            <ol class="breadcrumb"></ol>
+        </nav>
+    </div>
+</section>
+
+<section class="blog_area single-post-area area-padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 posts-list">
+                <div class="single-post">
+                    <div class="feature-img">
+                        <img class="img-fluid" src="~/@Model.Anh" alt="">
+                    </div>
+
+                    <div class="blog_details">
+                        <h2>
+                            @Model.YeuCau
+                        </h2>
+                        <ul class="blog-info-link mt-3 mb-4">
+                            <li><i class="far fa-user"></i> @ViewData["username"]</li>
+                            <li><i class="fas fa-calendar-alt"></i> @Model.NgayCapNhat</li>
+                        </ul>
+                        <p class="excert">
+                            @Model.MoTa
+                        </p>
+                        @if (Session["NguoiDung"] != null)
+                        {
+                            <button onclick="ungtuyen(@Model.MaCV)" class="genric-btn primary-border">Ứng tuyển ngay</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+@section scripts {
+    <script>
+            function ungtuyen(id) {
+                $.ajax({
+                    url: "@Url.Action("UngTuyen", "Job")",
+                    data: { "id": id},
+                    type: "post",
+                    dataType: "json",
+                    success: function (response) {
+                        if (response.status) {
+                            alert(response.data)
+                        }
+                        else {
+                            alert(response.data)
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.log(xhr.responseText)
+                    }
+                })
+            }
+    </script>
+}
